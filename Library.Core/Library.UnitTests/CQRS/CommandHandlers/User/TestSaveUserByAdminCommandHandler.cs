@@ -3,6 +3,7 @@ using Library.Core.CQRS.Resources.User.Commands;
 using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.Exceptions;
 using Library.Core.Exceptions.Tasks;
+using Library.Core.Models.Enums;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Moq;
 using NUnit.Framework;
@@ -28,7 +29,7 @@ namespace Library.UnitTests.CQRS.CommandHandlers.User
                 {
                     UID = 1,
                     UGID = new Guid("98dacc1d-7bee-4635-9c4c-9404a4af80dd"),
-                    URID =  1,
+                    URID =  (int) RoleEnum.User,
                     UFirstName = "OldName",
                     ULastName = "OldLastName",
                     UUserName = "OldUserName",
@@ -202,7 +203,7 @@ namespace Library.UnitTests.CQRS.CommandHandlers.User
             {
                 UID = 1,
                 UGID = Guid.NewGuid(),
-                URID = 3,
+                URID = (int) RoleEnum.Admin,
                 UFirstName = "NewName",
                 ULastName = "NewLastName",
                 UUserName = "NewUserName",
@@ -226,7 +227,7 @@ namespace Library.UnitTests.CQRS.CommandHandlers.User
             {
                 UID = 1,
                 UGID = new Guid("98dacc1d-7bee-4635-9c4c-9404a4af80dd"),
-                URID = 3,
+                URID = (int) RoleEnum.Admin,
                 UFirstName = "NewName",
                 ULastName = "NewLastName",
                 UUserName = "NewUserName",
@@ -241,7 +242,7 @@ namespace Library.UnitTests.CQRS.CommandHandlers.User
             handler.Handle(query);
 
             //Assert
-            ClassicAssert.AreEqual(3, users[0].URID);
+            ClassicAssert.AreEqual(4, users[0].URID);
             ClassicAssert.AreEqual("NewName", users[0].UFirstName);
             ClassicAssert.AreEqual("NewLastName", users[0].ULastName);
             ClassicAssert.AreEqual("NewUserName", users[0].UUserName);

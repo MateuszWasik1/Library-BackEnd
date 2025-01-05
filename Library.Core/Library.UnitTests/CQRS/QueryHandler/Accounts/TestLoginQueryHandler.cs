@@ -3,6 +3,7 @@ using Library.Core.Context;
 using Library.Core.CQRS.Resources.Accounts.Handlers;
 using Library.Core.CQRS.Resources.Accounts.Queries;
 using Library.Core.Exceptions.Accounts;
+using Library.Core.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using NUnit.Framework;
@@ -32,7 +33,7 @@ namespace Library.UnitTests.CQRS.QueryHandler.Accounts
                 {
                     UID = 1,
                     UGID = new Guid("30dd879c-ee2f-11db-8314-0800200c9a66"),
-                    URID = 1,
+                    URID = (int) RoleEnum.User,
                     UFirstName = "UFirstName1",
                     ULastName = "ULastName1",
                     UUserName = "Test1",

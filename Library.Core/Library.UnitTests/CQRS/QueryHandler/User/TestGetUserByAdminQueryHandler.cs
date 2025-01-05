@@ -3,6 +3,7 @@ using Library.Core.Context;
 using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.CQRS.Resources.User.Queries;
 using Library.Core.Exceptions;
+using Library.Core.Models.Enums;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Moq;
 using NUnit.Framework;
@@ -30,7 +31,7 @@ namespace Library.UnitTests.CQRS.QueryHandler.User
                 {
                     UID = 1,
                     UGID = new Guid("b189857a-bf45-4c25-9644-f2408351d328"),
-                    URID = 3,
+                    URID = (int) RoleEnum.Support,
                     UFirstName = "UFirstName1",
                     ULastName = "ULastName1",
                     UUserName = "UUserName1",
@@ -41,7 +42,7 @@ namespace Library.UnitTests.CQRS.QueryHandler.User
                 {
                     UID = 2,
                     UGID = new Guid("c189857a-bf45-4c25-9644-f2408351d328"),
-                    URID = 1,
+                    URID = (int) RoleEnum.Premium,
                     UFirstName = "UFirstName2",
                     ULastName = "ULastName2",
                     UUserName = "UUserName2",
