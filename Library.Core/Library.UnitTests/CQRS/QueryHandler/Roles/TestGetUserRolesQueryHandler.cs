@@ -1,6 +1,7 @@
 ﻿using Library.Core.Context;
 using Library.Core.CQRS.Resources.Roles.Handlers;
 using Library.Core.CQRS.Resources.Roles.Queries;
+using Library.Core.Models.Enums;
 using Library.Core.Services;
 using Moq;
 using NUnit.Framework;
@@ -27,22 +28,22 @@ namespace Library.UnitTests.CQRS.QueryHandler.Roles
                 new Core.Entities.User()
                 {
                     UID = 1,
-                    URID = 1,
+                    URID = (int) RoleEnum.User,
                 },
                 new Core.Entities.User()
                 {
                     UID = 2,
-                    URID = 2,
+                    URID = (int) RoleEnum.Premium,
                 },
                 new Core.Entities.User()
                 {
                     UID = 3,
-                    URID = 3,
+                    URID = (int) RoleEnum.Support,
                 },
                 new Core.Entities.User()
                 {
                     UID = 4,
-                    URID = 4,
+                    URID = (int) RoleEnum.Admin,
                 },
             };
 

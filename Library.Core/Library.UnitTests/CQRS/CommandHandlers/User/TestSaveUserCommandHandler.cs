@@ -8,6 +8,7 @@ using Library.Core.Exceptions.Tasks;
 using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.CQRS.Resources.User.Commands;
 using Library.Core.Exceptions;
+using Library.Core.Models.Enums;
 
 namespace Library.UnitTests.CQRS.CommandHandlers.User
 {
@@ -31,7 +32,7 @@ namespace Library.UnitTests.CQRS.CommandHandlers.User
                 {
                     UID = 1,
                     UGID = new Guid("98dacc1d-7bee-4635-9c4c-9404a4af80dd"),
-                    URID =  1,
+                    URID = (int) RoleEnum.User,
                     UFirstName = "OldName",
                     ULastName = "OldLastName",
                     UUserName = "OldUserName",
