@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Library.Core.CQRS.Dispatcher;
-using Library.Core.CQRS.Resources.Accounts.Queries;
-using Library.Core.Entities;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.CQRS.Resources.Books.Commands;
+using Library.Core.CQRS.Resources.Books.Queries;
 
 namespace Library.Core.Controllers
 {
@@ -17,12 +16,12 @@ namespace Library.Core.Controllers
         [HttpGet]
         [Route("GetBook")]
         public BookViewModel GetBook(Guid bgid)
-            => dispatcher.DispatchQuery<GetBugQuery, BookViewModel>(new GetBugQuery() { BGID = bgid });
+            => dispatcher.DispatchQuery<GetBookQuery, BookViewModel>(new GetBookQuery() { BGID = bgid });
 
         [HttpGet]
         [Route("GetBooks")]
-        public BooksViewModel GetBooks(BugTypeEnum bugType, int skip, int take)
-            => dispatcher.DispatchQuery<GetBugsQuery, BooksViewModel>(new GetBugsQuery() { BugType = bugType, Skip = skip, Take = take });
+        public BooksListViewModel GetBooks(int skip, int take)
+            => dispatcher.DispatchQuery<GetBooksQuery, BooksListViewModel>(new GetBooksQuery() { Skip = skip, Take = take });
 
         [HttpPost]
         [Route("AddBook")]

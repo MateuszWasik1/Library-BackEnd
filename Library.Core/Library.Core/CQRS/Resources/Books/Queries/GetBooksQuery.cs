@@ -3,10 +3,8 @@ using Library.Core.CQRS.Abstraction.Queries;
 
 namespace Library.Core.CQRS.Resources.Books.Queries
 {
-    public class GetBooksQuery : IQuery<BooksViewModel>
+    public class GetBooksQuery : IQuery<BooksListViewModel>
     {
-        public string? CGID { get; set; }
-        public int Status { get; set; }
         public int Skip { get; set; }
         public int Take { get; set; }
     }
