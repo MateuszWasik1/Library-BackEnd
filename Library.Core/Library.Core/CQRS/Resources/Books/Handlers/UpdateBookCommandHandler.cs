@@ -12,10 +12,10 @@ namespace Library.Core.CQRS.Resources.Books.Handlers
 
         public void Handle(UpdateBookCommand command)
         {
-            if (command.Model.BAuthorGID.ToString().Length == 0)
+            if (command.Model.BAuthorGID == Guid.Empty)
                 throw new AuthorRequiredException("Dodanie autora jest wymagane!");
 
-            if (command.Model.BPublisherGID.ToString().Length == 0)
+            if (command.Model.BPublisherGID == Guid.Empty)
                 throw new PublisherRequiredException("Dodanie wydawcy jest wymagane!");
 
             if (command.Model.BTitle.Length < 3)
