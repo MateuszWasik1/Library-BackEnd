@@ -2,7 +2,7 @@
 using Library.Core.CQRS.Resources.User.Commands;
 using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.Exceptions;
-using Library.Core.Exceptions.Users;
+using Library.Core.Exceptions.Tasks;
 using Library.Core.Models.Enums;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Moq;
