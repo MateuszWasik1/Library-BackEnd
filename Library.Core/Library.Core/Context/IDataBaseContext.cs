@@ -22,13 +22,6 @@ namespace Library.Core.Context
         IQueryable<Tests> Tests { get; }
         #endregion
 
-        #region Books
-        IQueryable<Books> UserBooks { get; }
-        IQueryable<Books> AllBooks { get; }
-        void CreateOrUpdate(Books books);
-        void DeleteBook(Books books);
-        #endregion
-
         void SaveChanges();
     }
 }

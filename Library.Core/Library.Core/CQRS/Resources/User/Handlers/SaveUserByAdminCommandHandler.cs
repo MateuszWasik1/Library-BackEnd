@@ -2,7 +2,7 @@
 using Library.Core.CQRS.Abstraction.Commands;
 using Library.Core.CQRS.Resources.User.Commands;
 using Library.Core.Exceptions;
-using Library.Core.Exceptions.Users;
+using Library.Core.Exceptions.Tasks;
 
 namespace Library.Core.CQRS.Resources.User.Handlers
 {

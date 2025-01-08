@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Library.Core.Context;
 using Library.Core.Services;
 using Library.Core.Models.ViewModels.UserViewModels;
-using Library.Core.Exceptions.Users;
+using Library.Core.Exceptions.Tasks;
 using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.CQRS.Resources.User.Commands;
 using Library.Core.Exceptions;
