@@ -1,4 +1,4 @@
-﻿namespace Library.Core.Exceptions.Tasks
+﻿namespace Library.Core.Exceptions.Users
 {
     public class UsersExceptions : Exception
     {

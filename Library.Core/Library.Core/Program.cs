@@ -7,6 +7,9 @@ using Library.Core.CQRS.Dispatcher;
 using Library.Core.CQRS.Resources.Accounts.Commands;
 using Library.Core.CQRS.Resources.Accounts.Handlers;
 using Library.Core.CQRS.Resources.Accounts.Queries;
+using Library.Core.CQRS.Resources.Books.Commands;
+using Library.Core.CQRS.Resources.Books.Handlers;
+using Library.Core.CQRS.Resources.Books.Queries;
 using Library.Core.CQRS.Resources.Roles.Handlers;
 using Library.Core.CQRS.Resources.Roles.Queries;
 using Library.Core.CQRS.Resources.User.Commands;
@@ -14,6 +17,7 @@ using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.CQRS.Resources.User.Queries;
 using Library.Core.Entities;
 using Library.Core.Models.ViewModels;
+using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Library.Core.Services;
 using Microsoft.AspNetCore.Identity;
@@ -94,6 +98,13 @@ builder.Services.AddScoped<IQueryHandler<GetIsUserAdminQuery, bool>, GetIsUserAd
 //Test
 builder.Services.AddScoped<IQueryHandler<GetTestDataQuery, List<Tests>>, GetTestDataQueryHandler>();
 
+//Books
+builder.Services.AddScoped<IQueryHandler<GetBookQuery, BookViewModel>, GetBookQueryHandler>();
+builder.Services.AddScoped<IQueryHandler<GetBooksQuery, BooksListViewModel>, GetBooksQueryHandler>();
+
+builder.Services.AddScoped<ICommandHandler<AddBookCommand>, AddBookCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<UpdateBookCommand>, UpdateBookCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<DeleteBookCommand>, DeleteBookCommandHandler>();
 #endregion
 
 //Authentications
