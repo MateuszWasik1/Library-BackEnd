@@ -39,6 +39,19 @@ namespace Library.Core.Context
         public IQueryable<Tests> Tests => dataContext.Tests.Where(x => x.TUID == user.UID);
         #endregion
 
+        #region Books
+        public IQueryable<Books> UserBooks => dataContext.Books.Where(x => x.BUID == user.UID);
+        public IQueryable<Books> AllBooks => dataContext.Books;
+        public void CreateOrUpdate(Books book)
+        {
+            if (book.BID == default)
+                dataContext.Books.Add(book);
+            else
+                dataContext.Entry(book).State = EntityState.Modified;
+        }
+        public void DeleteBook(Books book) => dataContext.Books.Remove(book);
+        #endregion
+
         public void SaveChanges() => dataContext.SaveChanges();
         public void Dispose() => dataContext.Dispose();
     }
