@@ -35,10 +35,6 @@ namespace Library.Core.Context
         public IQueryable<User> AllUsers => dataContext.User;
         #endregion
 
-        #region Tests
-        public IQueryable<Tests> Tests => dataContext.Tests.Where(x => x.TUID == user.UID);
-        #endregion
-
         #region Books
         public IQueryable<Books> UserBooks => dataContext.Books.Where(x => x.BUID == user.UID);
         public IQueryable<Books> AllBooks => dataContext.Books;

@@ -18,10 +18,6 @@ namespace Library.Core.Context
         IQueryable<User> AllUsers { get; }
         #endregion
 
-        #region Tests
-        IQueryable<Tests> Tests { get; }
-        #endregion
-
         #region Books
         IQueryable<Books> UserBooks { get; }
         IQueryable<Books> AllBooks { get; }
