@@ -94,10 +94,6 @@ builder.Services.AddScoped<IQueryHandler<GetIsUserPremiumQuery, bool>, GetIsUser
 builder.Services.AddScoped<IQueryHandler<GetIsUserSupportQuery, bool>, GetIsUserSupportQueryHandler>();
 builder.Services.AddScoped<IQueryHandler<GetIsUserAdminQuery, bool>, GetIsUserAdminQueryHandler>();
 
-
-//Test
-builder.Services.AddScoped<IQueryHandler<GetTestDataQuery, List<Tests>>, GetTestDataQueryHandler>();
-
 //Books
 builder.Services.AddScoped<IQueryHandler<GetBookQuery, BookViewModel>, GetBookQueryHandler>();
 builder.Services.AddScoped<IQueryHandler<GetBooksQuery, BooksListViewModel>, GetBooksQueryHandler>();
