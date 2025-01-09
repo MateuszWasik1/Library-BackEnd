@@ -19,7 +19,7 @@ namespace Library.Core.CQRS.Resources.Authors.Handlers
 
         public AuthorsListViewModel Handle(GetAuthorsQuery query)
         {
-            var authors = context.AllAuthors.AsNoTracking().ToList(); //ToDo rozdzielić w zależności od roli
+            var authors = context.Authors.AsNoTracking().ToList();
             var authorsViewModel = new List<AuthorsViewModel>();
 
             var count = authors.Count;
@@ -27,14 +27,14 @@ namespace Library.Core.CQRS.Resources.Authors.Handlers
 
             authors.ForEach(x =>
             {
-                var aVM = mapper.Map<Library.Core.Entities.Authors, AuthorsViewModel>(x);
+                var aVM = mapper.Map<Entities.Authors, AuthorsViewModel>(x);
 
-                AuthorsViewModel.Add(bVM);
+                authorsViewModel.Add(aVM);
             });
 
             var model = new AuthorsListViewModel()
             {
-                List = AuthorsViewModel,
+                List = authorsViewModel,
                 Count = count
             };
 

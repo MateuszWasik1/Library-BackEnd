@@ -2,54 +2,45 @@
 using Library.Core.CQRS.Abstraction.Commands;
 using Library.Core.CQRS.Resources.Authors.Commands;
 using Library.Core.Exceptions.Authors;
-using Library.Core.Services;
 
 namespace Library.Core.CQRS.Resources.Authors.Handlers
 {
     public class AddAuthorCommandHandler : ICommandHandler<AddAuthorCommand>
     {
         private readonly IDataBaseContext context;
-        private readonly IUserContext user;
-        public AddAuthorCommandHandler(IDataBaseContext context, IUserContext user)
-        {
-            this.context = context;
-            this.user = user;
-        }
+        public AddAuthorCommandHandler(IDataBaseContext context) => this.context = context;
 
         public void Handle(AddAuthorCommand command)
         {
-            if (command.Model.BAuthorGID == Guid.Empty)
-                throw new AuthorRequiredException("Dodanie autora jest wymagane!");
+            if (command.Model.AFirstName.Length < 1)
+                throw new AFirstNameMin1CharacterException("Imię autora nie powinno być krótsze niż 1 znak!");
 
-            if (command.Model.BPublisherGID == Guid.Empty)
-                throw new PublisherRequiredException("Dodanie wydawcy jest wymagane!");
+            if (command.Model.AFirstName.Length > 255)
+                throw new AFirstNameMax255CharacterException("Imię autora nie powinno być dłuższe niż 255 znaków!");
 
-            if (command.Model.BTitle.Length < 3)
-                throw new TitleNameMin3CharactersException("Tytuł książki powinien być dłuższy niż 3 znaki!");
+            if (command.Model?.AMiddleName?.Length > 255)
+                throw new AMiddleNameMax255CharacterException("Środkowe imię autora nie powinno być dłuższe niż 255 znaków!");
 
-            if (command.Model.BTitle.Length > 255)
-                throw new TitleNameMax255CharactersException("Tytuł książki powinien być krószy niż 255 znaków!");
+            if (command.Model.ALastName.Length < 1)
+                throw new ALastNameMin1CharacterException("Nazwisko autora nie powinno być krótsze niż 1 znak!");
 
-            if (command.Model.BISBN.Length != 13)
-                throw new ISBNDifferentThan13CharactersException("ISBN powinien posiadać 13 znaków!");
+            if (command.Model.ALastName.Length > 255)
+                throw new ALastNameMax255CharacterException("Nazwisko autora nie powinno być dłuższe niż 255 znaków!");
 
-            if (command.Model.BLanguage.Length > 255)
-                throw new LanguageMax255CharactersException("Język książki nie powinien przekraczać 255 znaków!");
+            if (command.Model?.ANickName?.Length > 255)
+                throw new ANickNameMax255CharacterException("Przydomek autora nie powinien być dłuższy niż 255 znaków!");
 
-            if (command.Model.BDescription?.Length > 2000)
-                throw new DescriptionMax2000CharactersException("Opis książki nie powinien przekraczać 2000 znaków!");
+            if (command.Model?.ANationality?.Length > 255)
+                throw new ANationalityMax255CharacterException("Narodowość autora nie powinien być dłuższy niż 255 znaków!");
 
             var author = new Entities.Authors()
             {
-                BGID = Guid.NewGuid(),
-                BAuthorGID = command.Model.BAuthorGID,
-                BPublisherGID = command.Model.BPublisherGID,
-                BUID = user.UID,
-                BTitle = command.Model.BTitle,
-                BISBN = command.Model.BISBN,
-                BGenre = command.Model.BGenre,
-                BLanguage = command.Model.BLanguage,
-                BDescription = command.Model.BDescription,
+                AGID = Guid.NewGuid(),
+                AFirstName = command.Model.AFirstName,
+                AMiddleName = command.Model.AMiddleName ?? "",
+                ALastName = command.Model.ALastName,
+                ANickName = command.Model.ANickName ?? "",
+                ANationality = command.Model.ANationality ?? "",
             };
 
             context.CreateOrUpdate(author);

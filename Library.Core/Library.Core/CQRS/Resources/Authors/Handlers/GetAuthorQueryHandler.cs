@@ -20,12 +20,12 @@ namespace Library.Core.CQRS.Resources.Authors.Handlers
 
         public AuthorViewModel Handle(GetAuthorQuery query)
         {
-            var author = context.AllAuthors.AsNoTracking().FirstOrDefault(x => x.AGID == query.AGID); //ToDo Zrobić ifa który rozdzieli AllAuthors i UserAuthors w zależności od roli.
+            var author = context.Authors.AsNoTracking().FirstOrDefault(x => x.AGID == query.AGID);
 
             if (author == null)
-                throw new AuthorNotFoundException("Nie udało się znaleźć książki!");
+                throw new AuthorNotFoundException("Nie udało się znaleźć autora!");
 
-            var AuthorViewModel = mapper.Map<Library.Core.Entities.Authors, AuthorViewModel>(author);
+            var AuthorViewModel = mapper.Map<Entities.Authors, AuthorViewModel>(author);
 
             return AuthorViewModel;
         }

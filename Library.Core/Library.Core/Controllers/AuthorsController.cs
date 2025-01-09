@@ -15,8 +15,8 @@ namespace Library.Core.Controllers
 
         [HttpGet]
         [Route("GetAuthor")]
-        public AuthorViewModel GetAuthor(Guid bgid)
-            => dispatcher.DispatchQuery<GetAuthorQuery, AuthorViewModel>(new GetAuthorQuery() { BGID = bgid });
+        public AuthorViewModel GetAuthor(Guid agid)
+            => dispatcher.DispatchQuery<GetAuthorQuery, AuthorViewModel>(new GetAuthorQuery() { AGID = agid });
 
         [HttpGet]
         [Route("GetAuthors")]
@@ -34,8 +34,8 @@ namespace Library.Core.Controllers
             => dispatcher.DispatchCommand(new UpdateAuthorCommand() { Model = model });
 
         [HttpDelete]
-        [Route("DeleteAuthor/{bGID}")]
-        public void Delete(Guid bGID)
-             => dispatcher.DispatchCommand(new DeleteAuthorCommand() { BGID = bGID });
+        [Route("DeleteAuthor/{agid}")]
+        public void Delete(Guid agid)
+             => dispatcher.DispatchCommand(new DeleteAuthorCommand() { AGID = agid });
     }
 }

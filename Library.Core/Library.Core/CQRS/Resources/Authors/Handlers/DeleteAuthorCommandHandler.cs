@@ -12,10 +12,10 @@ namespace Library.Core.CQRS.Resources.Authors.Handlers
 
         public void Handle(DeleteAuthorCommand command)
         {
-            var Author = context.AllAuthors.FirstOrDefault(x => x.AGID == command.AGID);
+            var Author = context.Authors.FirstOrDefault(x => x.AGID == command.AGID);
 
             if (Author == null)
-                throw new AuthorNotFoundException("Nie udało się znaleźć książki!");
+                throw new AuthorNotFoundException("Nie udało się znaleźć autora!");
 
             context.DeleteAuthor(Author);
             context.SaveChanges();

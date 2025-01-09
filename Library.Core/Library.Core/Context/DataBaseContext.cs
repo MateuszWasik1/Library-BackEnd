@@ -57,7 +57,7 @@ namespace Library.Core.Context
             else
                 dataContext.Entry(author).State = EntityState.Modified;
         }
-        public void DeleteAuthors(Authors author) => dataContext.Authors.Remove(author);
+        public void DeleteAuthor(Authors author) => dataContext.Authors.Remove(author);
         #endregion
 
         public void SaveChanges() => dataContext.SaveChanges();
