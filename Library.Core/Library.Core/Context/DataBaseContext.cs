@@ -48,6 +48,18 @@ namespace Library.Core.Context
         public void DeleteBook(Books book) => dataContext.Books.Remove(book);
         #endregion
 
+        #region Authors
+        public IQueryable<Authors> Authors => dataContext.Authors;
+        public void CreateOrUpdate(Authors author)
+        {
+            if (author.AID == default)
+                dataContext.Authors.Add(author);
+            else
+                dataContext.Entry(author).State = EntityState.Modified;
+        }
+        public void DeleteAuthors(Authors author) => dataContext.Authors.Remove(author);
+        #endregion
+
         public void SaveChanges() => dataContext.SaveChanges();
         public void Dispose() => dataContext.Dispose();
     }
