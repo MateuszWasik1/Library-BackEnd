@@ -60,6 +60,18 @@ namespace Library.Core.Context
         public void DeleteAuthor(Authors author) => dataContext.Authors.Remove(author);
         #endregion
 
+        #region Publishers
+        public IQueryable<Publishers> Publishers => dataContext.Publishers;
+        public void CreateOrUpdate(Publishers publisher)
+        {
+            if (publisher.PID == default)
+                dataContext.Publishers.Add(publisher);
+            else
+                dataContext.Entry(publisher).State = EntityState.Modified;
+        }
+        public void DeletePublisher(Publishers publisher) => dataContext.Publishers.Remove(publisher);
+        #endregion
+
         public void SaveChanges() => dataContext.SaveChanges();
         public void Dispose() => dataContext.Dispose();
     }
