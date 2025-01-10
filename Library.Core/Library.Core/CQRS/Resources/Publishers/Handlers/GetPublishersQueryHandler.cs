@@ -22,8 +22,8 @@ namespace Library.Core.CQRS.Resources.Publishers.Handlers
             var publishers = context.Publishers.AsNoTracking().ToList();
             var publishersViewModel = new List<PublishersViewModel>();
 
-            var count = Publishers.Count;
-            publishers = Publishers.Skip(query.Skip).Take(query.Take).ToList();
+            var count = publishers.Count;
+            publishers = publishers.Skip(query.Skip).Take(query.Take).ToList();
 
             publishers.ForEach(x =>
             {

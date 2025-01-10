@@ -15,7 +15,7 @@ namespace Library.Core.CQRS.Resources.Publishers.Handlers
             var publisher = context.Publishers.FirstOrDefault(x => x.PGID == command.PGID);
 
             if (publisher == null)
-                throw new PublisherNotFoundException("Nie udało się znaleźć książki!");
+                throw new PublisherNotFoundException("Nie udało się znaleźć wydawcy!");
 
             context.DeletePublisher(publisher);
             context.SaveChanges();

@@ -1,55 +1,43 @@
 ﻿using Library.Core.Context;
 using Library.Core.CQRS.Abstraction.Commands;
 using Library.Core.CQRS.Resources.Publishers.Commands;
-using Library.Core.Exceptions.Publishers;
-using Library.Core.Services;
+using Library.Core.Exceptions.Books;
 
 namespace Library.Core.CQRS.Resources.Publishers.Handlers
 {
     public class AddPublisherCommandHandler : ICommandHandler<AddPublisherCommand>
     {
         private readonly IDataBaseContext context;
-        private readonly IUserContext user;
-        public AddPublisherCommandHandler(IDataBaseContext context, IUserContext user)
-        {
-            this.context = context;
-            this.user = user;
-        }
+        public AddPublisherCommandHandler(IDataBaseContext context) => this.context = context;
 
         public void Handle(AddPublisherCommand command)
         {
-            if (command.Model.BAuthorGID == Guid.Empty)
-                throw new AuthorRequiredException("Dodanie autora jest wymagane!");
+            if (command.Model.PName.Length < 3)
+                throw new AuthorRequiredException("Nazwa wydawnictwa powinna być dłuższa niż 3 znaki!");
 
-            if (command.Model.BPublisherGID == Guid.Empty)
-                throw new PublisherRequiredException("Dodanie wydawcy jest wymagane!");
+            if (command.Model.PName.Length > 255)
+                throw new PublisherRequiredException("Nazwa wydawnictwa nie powinien przekraczać 255 znaków!");
 
-            if (command.Model.BTitle.Length < 3)
-                throw new TitleNameMin3CharactersException("Tytuł książki powinien być dłuższy niż 3 znaki!");
+            if (command.Model.PCountry.Length > 255)
+                throw new TitleNameMax255CharactersException("Kraj wydawnictwa powinien być krószy niż 255 znaków!");
 
-            if (command.Model.BTitle.Length > 255)
-                throw new TitleNameMax255CharactersException("Tytuł książki powinien być krószy niż 255 znaków!");
+            if (command.Model.PCity.Length > 255)
+                throw new LanguageMax255CharactersException("Miasto wydawnictwa nie powinien przekraczać 255 znaków!");
 
-            if (command.Model.BISBN.Length != 13)
-                throw new ISBNDifferentThan13CharactersException("ISBN powinien posiadać 13 znaków!");
+            if (command.Model.PEmail.Length > 255)
+                throw new LanguageMax255CharactersException("Email wydawnictwa nie powinien przekraczać 255 znaków!");
 
-            if (command.Model.BLanguage.Length > 255)
-                throw new LanguageMax255CharactersException("Język książki nie powinien przekraczać 255 znaków!");
-
-            if (command.Model.BDescription?.Length > 2000)
-                throw new DescriptionMax2000CharactersException("Opis książki nie powinien przekraczać 2000 znaków!");
+            if (command.Model.PPhone.Length > 255)
+                throw new LanguageMax255CharactersException("Telefon wydawnictwa nie powinien przekraczać 255 znaków!");
 
             var publisher = new Entities.Publishers()
             {
-                BGID = Guid.NewGuid(),
-                BAuthorGID = command.Model.BAuthorGID,
-                BPublisherGID = command.Model.BPublisherGID,
-                BUID = user.UID,
-                BTitle = command.Model.BTitle,
-                BISBN = command.Model.BISBN,
-                BGenre = command.Model.BGenre,
-                BLanguage = command.Model.BLanguage,
-                BDescription = command.Model.BDescription,
+                PGID = Guid.NewGuid(),
+                PName = command.Model.PName,
+                PCountry = command.Model.PCountry,
+                PCity = command.Model.PCity,
+                PEmail = command.Model.PEmail,
+                PPhone = command.Model.PPhone,
             };
 
             context.CreateOrUpdate(publisher);

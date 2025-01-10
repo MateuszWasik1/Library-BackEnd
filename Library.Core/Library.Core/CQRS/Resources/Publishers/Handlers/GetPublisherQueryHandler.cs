@@ -23,7 +23,7 @@ namespace Library.Core.CQRS.Resources.Publishers.Handlers
             var publisher = context.Publishers.AsNoTracking().FirstOrDefault(x => x.PGID == query.PGID);
 
             if (publisher == null)
-                throw new PublisherNotFoundException("Nie udało się znaleźć książki!");
+                throw new PublisherNotFoundException("Nie udało się znaleźć wydawcy!");
 
             var publisherViewModel = mapper.Map<Library.Core.Entities.Publishers, PublisherViewModel>(publisher);
 
