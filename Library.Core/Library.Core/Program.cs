@@ -7,6 +7,9 @@ using Library.Core.CQRS.Dispatcher;
 using Library.Core.CQRS.Resources.Accounts.Commands;
 using Library.Core.CQRS.Resources.Accounts.Handlers;
 using Library.Core.CQRS.Resources.Accounts.Queries;
+using Library.Core.CQRS.Resources.Authors.Commands;
+using Library.Core.CQRS.Resources.Authors.Handlers;
+using Library.Core.CQRS.Resources.Authors.Queries;
 using Library.Core.CQRS.Resources.Books.Commands;
 using Library.Core.CQRS.Resources.Books.Handlers;
 using Library.Core.CQRS.Resources.Books.Queries;
@@ -17,6 +20,7 @@ using Library.Core.CQRS.Resources.User.Handlers;
 using Library.Core.CQRS.Resources.User.Queries;
 using Library.Core.Entities;
 using Library.Core.Models.ViewModels;
+using Library.Core.Models.ViewModels.AuthorsViewModels;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Library.Core.Services;
@@ -101,6 +105,14 @@ builder.Services.AddScoped<IQueryHandler<GetBooksQuery, BooksListViewModel>, Get
 builder.Services.AddScoped<ICommandHandler<AddBookCommand>, AddBookCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<UpdateBookCommand>, UpdateBookCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<DeleteBookCommand>, DeleteBookCommandHandler>();
+
+//Authors
+builder.Services.AddScoped<IQueryHandler<GetAuthorQuery, AuthorViewModel>, GetAuthorQueryHandler>();
+builder.Services.AddScoped<IQueryHandler<GetAuthorsQuery, AuthorsListViewModel>, GetAuthorsQueryHandler>();
+
+builder.Services.AddScoped<ICommandHandler<AddAuthorCommand>, AddAuthorCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<UpdateAuthorCommand>, UpdateAuthorCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<DeleteAuthorCommand>, DeleteAuthorCommandHandler>();
 #endregion
 
 //Authentications

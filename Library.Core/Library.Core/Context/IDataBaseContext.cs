@@ -25,6 +25,12 @@ namespace Library.Core.Context
         void DeleteBook(Books books);
         #endregion
 
+        #region Authors
+        IQueryable<Authors> Authors { get; }
+        void CreateOrUpdate(Authors authors);
+        void DeleteAuthor(Authors authors);
+        #endregion
+
         void SaveChanges();
     }
 }

@@ -17,3 +17,26 @@ CREATE TABLE AppRoles (
 )
 
 INSERT INTO AppRoles (RGID, RName) VALUES ('1A29FC40-CA47-1067-B31D-00DD0106621A', 'User'), ('2A29FC40-CA47-1067-B31D-00DD0106621A', 'Premium'), ('3B29FC40-CA47-1067-B31D-00DD0106622B', 'Support'), ('4C29FC40-CA47-1067-B31D-00DD0106623C', 'Admin'); 
+
+CREATE TABLE Authors (
+	AID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    AGID uniqueidentifier NOT NULL,
+    AFirstName nvarchar(255) NOT NULL,
+    AMiddleName nvarchar(255) NULL,
+    ALastName nvarchar(255) NOT NULL,
+    ANickName nvarchar(255) NULL,
+    ANationality nvarchar(255) NULL,
+);
+
+CREATE TABLE Books (
+	BID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	BGID uniqueidentifier NOT NULL,
+	BAuthorGID uniqueidentifier NOT NULL,
+	BPublisherGID uniqueidentifier NOT NULL,
+	BUID INT NOT NULL,
+	BTitle nvarchar(255) NOT NULL,
+	BISBN nvarchar(13) NOT NULL,
+	BGenre INT NOT NULL,
+	BLanguage nvarchar(255) NOT NULL,
+	BDescription nvarchar(2000) NULL,
+);
