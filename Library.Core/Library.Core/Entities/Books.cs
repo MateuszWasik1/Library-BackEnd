@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Library.Core.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library.Core.Entities
@@ -14,7 +15,7 @@ namespace Library.Core.Entities
         public int BUID { get; set; }
         public string BTitle { get; set; }
         public string BISBN { get; set; }
-        public int BGenre { get; set; } //ToDo - set Enum insteadof int
+        public GenreEnum BGenre { get; set; }
         public string BLanguage { get; set; }
         public string? BDescription { get; set; }
     }

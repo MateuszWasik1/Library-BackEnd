@@ -7,6 +7,7 @@ using Library.Core.CQRS.Resources.Books.Handlers;
 using Library.Core.CQRS.Resources.Books.Queries;
 using Library.Core.Exceptions.Books;
 using Library.Core.Models.ViewModels.BooksViewModels;
+using Library.Core.Models.Enums;
 
 namespace Library.UnitTests.CQRS.QueryHandlers.Books
 {
@@ -37,7 +38,7 @@ namespace Library.UnitTests.CQRS.QueryHandlers.Books
                     BTitle = "Tytuł 1",
                     BISBN = "1234567890123",
                     BDescription = "Description 1",
-                    BGenre = 1,
+                    BGenre = GenreEnum.Fantasy,
                 },
                 new Core.Entities.Books()
                 {
@@ -50,7 +51,7 @@ namespace Library.UnitTests.CQRS.QueryHandlers.Books
                     BTitle = "Tytuł 2",
                     BISBN = "1234567890124",
                     BDescription = "Description 2",
-                    BGenre = 1,
+                    BGenre = GenreEnum.Fantasy,
                 },
                 new Core.Entities.Books()
                 {
@@ -63,7 +64,7 @@ namespace Library.UnitTests.CQRS.QueryHandlers.Books
                     BTitle = "Tytuł 3",
                     BISBN = "1234567890125",
                     BDescription = "Description 3",
-                    BGenre = 1,
+                    BGenre = GenreEnum.Fantasy,
                 }
             };
 
