@@ -10,5 +10,6 @@ namespace Library.Core.CQRS.Resources.Books.Queries
         public int Take { get; set; }
         public GenreEnum Genre { get; set; }
         public Guid AGID { get; set; }
+        public Guid PGID { get; set; }
     }
 }

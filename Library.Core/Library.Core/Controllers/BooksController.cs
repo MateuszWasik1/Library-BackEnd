@@ -21,8 +21,8 @@ namespace Library.Core.Controllers
 
         [HttpGet]
         [Route("GetBooks")]
-        public BooksListViewModel GetBooks(int skip, int take, GenreEnum genre, Guid agid)
-            => dispatcher.DispatchQuery<GetBooksQuery, BooksListViewModel>(new GetBooksQuery() { Skip = skip, Take = take, Genre = genre, AGID = agid });
+        public BooksListViewModel GetBooks(int skip, int take, GenreEnum genre, Guid agid, Guid pgid)
+            => dispatcher.DispatchQuery<GetBooksQuery, BooksListViewModel>(new GetBooksQuery() { Skip = skip, Take = take, Genre = genre, AGID = agid, PGID = pgid });
 
         [HttpPost]
         [Route("AddBook")]

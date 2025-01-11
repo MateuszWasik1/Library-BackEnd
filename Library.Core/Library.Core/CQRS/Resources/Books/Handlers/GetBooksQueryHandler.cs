@@ -30,6 +30,9 @@ namespace Library.Core.CQRS.Resources.Books.Handlers
             if(query.AGID != Guid.Empty)
                 books = books.Where(x => x.BAuthorGID == query.AGID).ToList();
 
+            if (query.PGID != Guid.Empty)
+                books = books.Where(x => x.BPublisherGID == query.PGID).ToList();
+
             var booksViewModel = new List<BooksViewModel>();
 
             var count = books.Count;
@@ -37,7 +40,7 @@ namespace Library.Core.CQRS.Resources.Books.Handlers
 
             books.ForEach(x =>
             {
-                var bVM = mapper.Map<Library.Core.Entities.Books, BooksViewModel>(x);
+                var bVM = mapper.Map<Entities.Books, BooksViewModel>(x);
 
                 booksViewModel.Add(bVM);
             });
