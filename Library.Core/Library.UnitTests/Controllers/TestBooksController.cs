@@ -2,6 +2,7 @@
 using Library.Core.CQRS.Dispatcher;
 using Library.Core.CQRS.Resources.Books.Commands;
 using Library.Core.CQRS.Resources.Books.Queries;
+using Library.Core.Models.Enums;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Moq;
 using NUnit.Framework;
@@ -36,7 +37,7 @@ namespace Library.UnitTests.Controllers
             var controller = new BooksController(dispatcher.Object);
 
             //Act
-            controller.GetBooks(0, 0);
+            controller.GetBooks(0, 0, GenreEnum.All, new Guid());
 
             //Assert
             dispatcher.Verify(x => x.DispatchQuery<GetBooksQuery, BooksListViewModel>(It.IsAny<GetBooksQuery>()), Times.Once);
