@@ -3,6 +3,7 @@ using Library.Core.CQRS.Dispatcher;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.CQRS.Resources.Books.Commands;
 using Library.Core.CQRS.Resources.Books.Queries;
+using Library.Core.Models.Enums;
 
 namespace Library.Core.Controllers
 {
@@ -20,8 +21,8 @@ namespace Library.Core.Controllers
 
         [HttpGet]
         [Route("GetBooks")]
-        public BooksListViewModel GetBooks(int skip, int take)
-            => dispatcher.DispatchQuery<GetBooksQuery, BooksListViewModel>(new GetBooksQuery() { Skip = skip, Take = take });
+        public BooksListViewModel GetBooks(int skip, int take, GenreEnum genre, Guid agid)
+            => dispatcher.DispatchQuery<GetBooksQuery, BooksListViewModel>(new GetBooksQuery() { Skip = skip, Take = take, Genre = genre, AGID = agid });
 
         [HttpPost]
         [Route("AddBook")]

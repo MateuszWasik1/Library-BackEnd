@@ -2,6 +2,7 @@
 using Library.Core.Context;
 using Library.Core.CQRS.Abstraction.Queries;
 using Library.Core.CQRS.Resources.Books.Queries;
+using Library.Core.Models.Enums;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,16 @@ namespace Library.Core.CQRS.Resources.Books.Handlers
 
         public BooksListViewModel Handle(GetBooksQuery query)
         {
-            var books = context.AllBooks.AsNoTracking().ToList(); //ToDo rozdzielić w zależności od roli
+            var books = new List<Entities.Books>();
+
+            if (query.Genre == GenreEnum.All)
+                books = context.AllBooks.AsNoTracking().ToList(); //ToDo rozdzielić w zależności od roli
+            else
+                books = context.AllBooks.Where(x => x.BGenre == query.Genre).AsNoTracking().ToList();
+
+            if(query.AGID != Guid.Empty)
+                books = books.Where(x => x.BAuthorGID == query.AGID).ToList();
+
             var booksViewModel = new List<BooksViewModel>();
 
             var count = books.Count;
