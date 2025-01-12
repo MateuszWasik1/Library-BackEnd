@@ -37,7 +37,7 @@ namespace Library.UnitTests.Controllers
             var controller = new BooksController(dispatcher.Object);
 
             //Act
-            controller.GetBooks(0, 0, GenreEnum.All, new Guid());
+            controller.GetBooks(0, 0, GenreEnum.All, new Guid(), new Guid());
 
             //Assert
             dispatcher.Verify(x => x.DispatchQuery<GetBooksQuery, BooksListViewModel>(It.IsAny<GetBooksQuery>()), Times.Once);
