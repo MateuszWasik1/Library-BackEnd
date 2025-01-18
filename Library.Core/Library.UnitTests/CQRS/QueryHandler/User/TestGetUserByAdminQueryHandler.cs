@@ -64,10 +64,6 @@ namespace Library.UnitTests.CQRS.QueryHandler.User
                 UUserName = users[0].UUserName,
                 UEmail = users[0].UEmail,
                 UPhone = users[0].UPhone,
-                UCategoriesCount = 2,
-                UTasksCount = 1,
-                UTaskNotesCount = 4,
-                USavingsCount = 9,
             });
         }
 

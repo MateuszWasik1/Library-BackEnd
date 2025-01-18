@@ -10,9 +10,5 @@
         public string? UUserName { get; set; }
         public string? UEmail { get; set; }
         public string? UPhone { get; set; }
-        public int UCategoriesCount { get; set; }
-        public int UTasksCount { get; set; }
-        public int UTaskNotesCount { get; set; }
-        public int USavingsCount { get; set; }
     }
 }
