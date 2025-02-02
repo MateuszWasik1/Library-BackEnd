@@ -1,7 +1,7 @@
 ﻿using Library.Core.Context;
 using Library.Core.CQRS.Abstraction.Commands;
 using Library.Core.CQRS.Resources.Reports.Commands;
-using Library.Core.Exceptions.Books;
+using Library.Core.Exceptions.Reports;
 
 namespace Library.Core.CQRS.Resources.Reports.Handlers
 {
@@ -13,13 +13,13 @@ namespace Library.Core.CQRS.Resources.Reports.Handlers
         public void Handle(AddReportCommand command)
         {
             if (command.Model.RName.Length < 3)
-                throw new AuthorRequiredException("Nazwa wydawnictwa powinna być dłuższa niż 3 znaki!");
+                throw new RNameMin3Characters("Nazwa raportu powinna być dłuższa niż 3 znaki!");
 
             if (command.Model.RName.Length > 255)
-                throw new ReportRequiredException("Nazwa wydawnictwa nie powinien przekraczać 255 znaków!");
+                throw new RNameMax255Characters("Nazwa raportu nie powinna przekraczać 255 znaków!");
 
             if (command.Model.RBase64.Length < 3)
-                throw new TitleNameMax255CharactersException("Kraj wydawnictwa powinien być krószy niż 255 znaków!");
+                throw new RBase64Min3Characters("Base64 raportu powinien być dłuższy niż 3 znaki!");
 
             var Report = new Entities.Reports()
             {
