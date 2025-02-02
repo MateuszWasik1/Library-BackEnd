@@ -12,6 +12,7 @@ namespace Library.Core
         public DbSet<Books> Books => Set<Books>();
         public DbSet<Authors> Authors => Set<Authors>();
         public DbSet<Publishers> Publishers => Set<Publishers>();
+        public DbSet<Reports> Reports => Set<Reports>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
