@@ -3,6 +3,7 @@ using Library.Core.Entities;
 using Library.Core.Models.ViewModels.AuthorsViewModels;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.Models.ViewModels.PublishersViewModels;
+using Library.Core.Models.ViewModels.ReportsViewModels;
 using Library.Core.Models.ViewModels.UserViewModels;
 
 namespace Library.Core
@@ -23,6 +24,9 @@ namespace Library.Core
             CreateMap<Publishers, PublisherViewModel>();
             CreateMap<Publishers, PublishersViewModel>();
             CreateMap<Publishers, PublishersListViewModel>();
+            CreateMap<Reports, ReportViewModel>();
+            CreateMap<Reports, ReportsViewModel>();
+            CreateMap<Reports, ReportsListViewModel>();
         }
     }
 }

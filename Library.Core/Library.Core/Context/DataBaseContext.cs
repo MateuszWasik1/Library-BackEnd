@@ -72,6 +72,18 @@ namespace Library.Core.Context
         public void DeletePublisher(Publishers publisher) => dataContext.Publishers.Remove(publisher);
         #endregion
 
+        #region Reports
+        public IQueryable<Reports> Reports => dataContext.Reports;
+        public void CreateOrUpdate(Reports report)
+        {
+            if (report.RID == default)
+                dataContext.Reports.Add(report);
+            else
+                dataContext.Entry(report).State = EntityState.Modified;
+        }
+        public void DeleteReport(Reports report) => dataContext.Reports.Remove(report);
+        #endregion
+
         public void SaveChanges() => dataContext.SaveChanges();
         public void Dispose() => dataContext.Dispose();
     }

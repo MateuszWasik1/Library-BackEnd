@@ -37,6 +37,12 @@ namespace Library.Core.Context
         void DeletePublisher(Publishers publisher);
         #endregion
 
+        #region Reports
+        IQueryable<Reports> Reports { get; }
+        void CreateOrUpdate(Reports report);
+        void DeleteReport(Reports report);
+        #endregion
+
         void SaveChanges();
     }
 }

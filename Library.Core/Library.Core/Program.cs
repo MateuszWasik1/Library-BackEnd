@@ -16,6 +16,9 @@ using Library.Core.CQRS.Resources.Books.Queries;
 using Library.Core.CQRS.Resources.Publishers.Commands;
 using Library.Core.CQRS.Resources.Publishers.Handlers;
 using Library.Core.CQRS.Resources.Publishers.Queries;
+using Library.Core.CQRS.Resources.Reports.Commands;
+using Library.Core.CQRS.Resources.Reports.Handlers;
+using Library.Core.CQRS.Resources.Reports.Queries;
 using Library.Core.CQRS.Resources.Roles.Handlers;
 using Library.Core.CQRS.Resources.Roles.Queries;
 using Library.Core.CQRS.Resources.User.Commands;
@@ -26,6 +29,7 @@ using Library.Core.Models.ViewModels;
 using Library.Core.Models.ViewModels.AuthorsViewModels;
 using Library.Core.Models.ViewModels.BooksViewModels;
 using Library.Core.Models.ViewModels.PublishersViewModels;
+using Library.Core.Models.ViewModels.ReportsViewModels;
 using Library.Core.Models.ViewModels.UserViewModels;
 using Library.Core.Services;
 using Microsoft.AspNetCore.Identity;
@@ -125,6 +129,12 @@ builder.Services.AddScoped<IQueryHandler<GetPublishersQuery, PublishersListViewM
 builder.Services.AddScoped<ICommandHandler<AddPublisherCommand>, AddPublisherCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<UpdatePublisherCommand>, UpdatePublisherCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<DeletePublisherCommand>, DeletePublisherCommandHandler>();
+
+//Reports
+builder.Services.AddScoped<IQueryHandler<GetReportsQuery, ReportsListViewModel>, GetReportsQueryHandler>();
+
+builder.Services.AddScoped<ICommandHandler<AddReportCommand>, AddReportCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<DeleteReportCommand>, DeleteReportCommandHandler>();
 #endregion
 
 //Authentications
