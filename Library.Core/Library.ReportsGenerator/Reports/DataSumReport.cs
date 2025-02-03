@@ -3,16 +3,11 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using Library.Core;
-using Library.Core.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace Library.ReportsGenerator.Reports
 {
     public class DataSumReport
     {
-        //private readonly IDataBaseContext context;
-        //public DataSumReport(IDataBaseContext context) => this.context = context;
-
         private readonly DataContext context;
         public DataSumReport(DataContext context) => this.context = context;
 
@@ -20,47 +15,55 @@ namespace Library.ReportsGenerator.Reports
         {
             try
             {
-                var xd = context.Books.Count();
-                Console.WriteLine("Tworzenie katalogu dla pliku PDF...");
+                var authorsCount = context.Authors.Count();
+                var booksCount = context.Books.Count();
+                var publishersCount = context.Publishers.Count();
+                var usersCount = context.User.Count();
+                
                 string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Reports");
-                Directory.CreateDirectory(folderPath);
 
-                string filePath = Path.Combine(folderPath, $"Raport_{DateTime.Now:yyyy-MM-dd}.pdf");
+                string fileName = $"Raport_{DateTime.Now:yyyy-MM-dd}.pdf";
+
+                string filePath = Path.Combine(folderPath, fileName);
                 Console.WriteLine($"Generowanie raportu: {filePath}");
 
                 using (PdfWriter writer = new PdfWriter(filePath))
                 using (PdfDocument pdf = new PdfDocument(writer))
                 using (Document document = new Document(pdf))
                 {
-                    Console.WriteLine("Dodawanie tytułu raportu...");
-                    document.Add(new Paragraph("Raport Dzienny")
+                    document.Add(new Paragraph($"Raport Dzienny {DateTime.Now:HH:mm}")
                         .SetTextAlignment(TextAlignment.CENTER)
-                        .SetFontSize(20));
+                        .SetFontSize(18));
 
-                    Console.WriteLine("Tworzenie tabeli...");
-                    Table table = new Table(3).UseAllAvailableWidth();
-                    table.AddHeaderCell("ABC");
-                    table.AddHeaderCell("DEF");
-                    table.AddHeaderCell("GHI");
+                    Table table = new Table(4).UseAllAvailableWidth();
+                    table.AddHeaderCell("Liczba autorów");
+                    table.AddHeaderCell("Liczba książek");
+                    table.AddHeaderCell("Liczba wydawnictw");
+                    table.AddHeaderCell("Liczba uzytkowników");
 
                     Console.WriteLine("Dodawanie danych do tabeli...");
-                    table.AddCell("1");
-                    table.AddCell("2");
-                    table.AddCell("3");
-
-                    table.AddCell("4");
-                    table.AddCell("5");
-                    table.AddCell("6");
+                    table.AddCell($"{authorsCount}");
+                    table.AddCell($"{booksCount}");
+                    table.AddCell($"{publishersCount}");
+                    table.AddCell($"{usersCount}");
 
                     document.Add(table);
-                    Console.WriteLine("Raport PDF wygenerowany pomyślnie!");
                 }
 
                 string base64String = Convert.ToBase64String(File.ReadAllBytes(filePath));
-                Console.WriteLine("Plik przekonwertowany do Base64!");
 
-                // Zapis do bazy danych
-                //SavePdfToDatabase(base64String);
+                var model = new Core.Entities.Reports()
+                {
+                    RGID = Guid.NewGuid(),
+                    RName = fileName,
+                    RGenerationDate = DateTime.Now,
+                    RBase64 = base64String
+                };
+
+                context.Reports.Add(model);
+                context.SaveChanges();
+
+                Console.WriteLine("Raport PDF wygenerowany pomyślnie!");
             }
             catch (Exception ex)
             {

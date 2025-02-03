@@ -24,8 +24,8 @@ namespace Library.Core.Controllers
             => dispatcher.DispatchCommand(new AddReportCommand() { Model = model });
 
         [HttpDelete]
-        [Route("DeleteReport/{pgid}")]
-        public void Delete(Guid pgid)
-             => dispatcher.DispatchCommand(new DeleteReportCommand() { PGID = pgid });
+        [Route("DeleteReport/{rgid}")]
+        public void Delete(Guid rgid)
+             => dispatcher.DispatchCommand(new DeleteReportCommand() { RGID = rgid });
     }
 }

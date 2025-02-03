@@ -21,7 +21,7 @@ class Program
     {
         var date = DateTime.Now;
 
-        if (date.Hour == 20 && date.Minute == 0)
+        if (date.Hour == 19)
         {
             var generator = serviceProvider.GetRequiredService<DataSumReport>();
             generator.GenerateDataSumReport();
