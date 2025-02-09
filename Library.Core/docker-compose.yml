@@ -1,0 +1,63 @@
+services:
+  librarycore:
+    build: 
+      context: .
+      dockerfile: dockerfile.api
+    container_name: librarycore
+    ports:
+      - "5000:80"
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=database;Database=Library
+    networks:
+      app-network:
+        aliases:
+          - librarycore
+    restart: always
+
+  reportsgenerator:
+    build: ./Library.ReportsGenerator
+    container_name: reportsgenerator
+    depends_on:
+      - librarycore
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - REST_API_URL=http://librarycore/
+    volumes:
+      - reports-data:/app/reports
+    networks:
+      - app-network
+    restart: always
+
+  frontend:
+    build: ../../Library-FrontEnd/CoreWeb
+    container_name: frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - librarycore
+    networks:
+      - app-network
+    restart: always
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: database
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - db-data:/var/opt/mssql
+    restart: always
+
+networks:
+  app-network:
+
+volumes:
+  db-data:
+  reports-data:
